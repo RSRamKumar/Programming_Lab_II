@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block page %}{{title}}{% endblock %}
+{% block heading %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h4>HGNC Information Tool</h4>
+   <form method="POST" action="/get_info">
+    <textarea name="textbox"></textarea>
+    <button type="submit" name="submit">Submit</button>
+  </form>
+  {{ hgnc_info | safe }}
+  <br>
+  <h4>Shortest Path Tool</h4>
+    <p>Please enter two HGNC symbols separated by a comma ","</p>
+    <form method="POST" action="/paths">
+        <textarea name="textbox"></textarea>
+        <button type="submit" name="submit">Submit</button>
+    </form>
+    <h4>{{ paths_header }}</h4>
+  <ul>
+    {% for n in shortest_path %}
+    <li>{{n}}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+{% block footer %}
+{{super()}}
+{% endblock %}
